@@ -2,7 +2,9 @@ package base;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by corentin on 01/05/16.
@@ -48,7 +50,9 @@ public class AlgorithmeGenetique {
             stats.afterSelection(population);
             Population children = populationClass.newInstance();
 
-            // PVC.Croisement et mutation
+
+            Collections.shuffle(population);
+            // Croisement et mutation
             for (int j = 0; j+1 < population.size(); j+=2) {
                 if(Probability.rate(methodCroisement.getProbability())) {
 
