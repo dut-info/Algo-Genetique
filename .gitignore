@@ -1,5 +1,8 @@
 code.iml
 Rapport.aux
+code/out
+code/.classpath
+code/.project
 *.log
 *.toc
 code/.idea
