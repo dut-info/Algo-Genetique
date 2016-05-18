@@ -27,30 +27,38 @@ public class AlgorithmeGenetique {
         this.nbIndividus = nbIndividus;
     }
 
-    public Individu run(List<? extends Gene> genes) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        Population population = populationClass.getDeclaredConstructor(List.class, Integer.class).newInstance(genes, nbIndividus);
+    public Individu run(List<? extends Gene> genes) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        Stats stats = Stats.getInstance();
+        Population population;
+        try {
+            population = populationClass.getDeclaredConstructor(List.class, Integer.class).newInstance(genes, nbIndividus);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalArgumentException("Class "+ populationClass +" should have a custructor with arguments : (List.class, Integer.class)");
+        }
+
         for (int i = 0; i < nbIterations; i++) {
+            stats.onNewGeneration(population);
             // Selection
             population = methodSelection.select(population);
+            stats.afterSelection(population);
             Population children = populationClass.newInstance();
 
-            // Croisement
-            for (int j = 0; j < population.size(); j++) {
+            // PVC.Croisement et mutation
+            for (int j = 0; j+1 < population.size(); j+=2) {
                 if(Probability.rate(methodCroisement.getProbability())) {
 
-                    ArrayList<Individu> child = methodCroisement.croiser(null,null);
+                    ArrayList<Individu> child = methodCroisement.croiser(population.get(j), population.get(j+1));
 
                     for (int k = 0; k < child.size(); k++) {
-                        // Mutation
+                        // PVC.Mutation
                         if (Probability.rate(methodMutation.getProbability())) {
-                            children.set(k, methodMutation.muter(children.get(k)));
+                            child.set(k, methodMutation.muter(child.get(k)));
                         }
                         children.add(child.get(k));
                     }
                 }
             }
-
-
+            stats.onChildrenGeneration(children);
 
             // Ajout de la nouvelle population
             population.addAll(children);

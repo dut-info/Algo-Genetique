@@ -1,5 +1,9 @@
+package PVC;
+
 import base.Gene;
 import base.Individu;
+
+import java.util.Comparator;
 
 /**
  * Created by corentin on 17/04/16.
@@ -7,6 +11,10 @@ import base.Individu;
 public class Chemin extends Individu {
 
     private Double fitness = null;
+
+    public Chemin() {
+        super();
+    }
 
     @Override
     public double getFitness() {
@@ -27,12 +35,12 @@ public class Chemin extends Individu {
     @Override
     public String toString()
     {
-        String r = "";
+        String r = "{ ";
 
         for(Gene gene : this) {
             r += gene + "; ";
         }
-
+        r += "} : "+ this.fitness;
         return r;
     }
 
