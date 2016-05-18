@@ -3,7 +3,8 @@ package base;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Individu extends ArrayList<Gene> {
+public abstract class Individu extends ArrayList<Gene> implements Comparable<Individu>
+{
 
     /**
      * Créer un Individu aléatoire
