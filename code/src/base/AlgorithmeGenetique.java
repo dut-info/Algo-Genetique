@@ -29,6 +29,7 @@ public class AlgorithmeGenetique {
 
     public Individu run(List<? extends Gene> genes) throws IllegalAccessException, InstantiationException, InvocationTargetException {
         Stats stats = Stats.getInstance();
+        stats.onStart();
         Population population;
         try {
             population = populationClass.getDeclaredConstructor(List.class, Integer.class).newInstance(genes, nbIndividus);
@@ -36,8 +37,12 @@ public class AlgorithmeGenetique {
             throw new IllegalArgumentException("Class "+ populationClass +" should have a custructor with arguments : (List.class, Integer.class)");
         }
 
-        for (int i = 0; i < nbIterations; i++) {
+        int i =0;
+        int sameSuccessif = 0;
+        Individu savedBest = null;
+        while(i < nbIterations) {
             stats.onNewGeneration(population);
+            savedBest = population.getBest();
             // Selection
             population = methodSelection.select(population);
             stats.afterSelection(population);
@@ -62,8 +67,12 @@ public class AlgorithmeGenetique {
 
             // Ajout de la nouvelle population
             population.addAll(children);
+            if(savedBest.equals(population.getBest())) sameSuccessif++;
+            else sameSuccessif = 0;
+            i++;
         }
-
-        return population.getBest();
+        Individu best = population.getBest();
+        stats.onFinish(best, i);
+        return best;
     }
 }

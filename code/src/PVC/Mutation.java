@@ -8,6 +8,17 @@ import base.Probability;
  * Created by corentin on 18/05/16.
  */
 public class Mutation implements base.Mutation {
+
+    private double propability;
+
+    public Mutation(double propability) {
+        this.propability = propability;
+    }
+
+    public Mutation() {
+        this.propability = 0.1;
+    }
+
     @Override
     public Individu muter(Individu child) {
         int individuSize = child.size() - 1;
@@ -23,6 +34,6 @@ public class Mutation implements base.Mutation {
 
     @Override
     public double getProbability() {
-        return 0.05;
+        return this.propability;
     }
 }

@@ -12,7 +12,7 @@ public class Stats {
 
     private static Stats instance = null;
     private OutputStream outputStream;
-
+    private Chemin lastIndiv = null;
     private Stats() {}
 
     public static Stats getInstance() {
@@ -25,14 +25,24 @@ public class Stats {
     }
 
     public void onNewGeneration(Population population) {
+//        System.out.println(population.getBest().getFitness()+", "+population.getAverageFitness());
 
-        Representation.getInstance().drawChemin((Chemin) population.getBest());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        Chemin indiv = (Chemin) population.getBest();
+        if(lastIndiv != null && !lastIndiv.equals(indiv)) {
+            Representation.getInstance().drawChemin(indiv);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+      lastIndiv = indiv;
 
+    }
+    public void onStart() {}
+    public void onFinish(Individu individu, int nbIterations) {
+        System.out.println(nbIterations);
     }
     public void afterSelection(Population population) {}
     public void onChildrenGeneration(Population population) {}

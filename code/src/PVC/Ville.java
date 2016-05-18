@@ -18,6 +18,12 @@ public class Ville implements Gene {
         this.y = y;
     }
 
+    public Ville(double x, double y) {
+        this.num = ++currentNumber;
+        this.x = x;
+        this.y = y;
+    }
+
     public Ville(int num)
     {
         this(num, Math.random()*100, Math.random()*100);
