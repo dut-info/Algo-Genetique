@@ -8,18 +8,22 @@ import java.util.List;
 
 public abstract class Population extends ArrayList<Individu> {
 
+    private Double averageFitness = null;
+
     public abstract double getDiversity();
 
     public double getAverageFitness()
     {
-        double averageFit = 0;
-        for(Individu individu : this) {
-            averageFit += individu.getFitness();
+        if(averageFitness == null) {
+            double averageFitness = 0;
+            for(Individu individu : this) {
+                averageFitness += individu.getFitness();
+            }
+
+            averageFitness /= this.size();
         }
 
-        averageFit /= this.size();
-
-        return averageFit;
+        return averageFitness;
     }
 
     /**
