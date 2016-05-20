@@ -46,6 +46,12 @@ public class Chemin extends Individu {
 
 	@Override
 	public int compareTo(Individu o) {
-		return (int) (this.getFitness() - o.getFitness());
+        if(this.getFitness() < o.getFitness()) {
+            return -1;
+        } else if(this.getFitness() > o.getFitness()) {
+            return 1;
+        } else {
+            return 0;
+        }
 	}
 }
