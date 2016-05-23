@@ -3,7 +3,7 @@ package base;
 import PVC.Chemin;
 import PVC.Representation;
 
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * Created by corentin on 18/05/16.
@@ -11,7 +11,7 @@ import java.io.OutputStream;
 public class Stats {
 
     private static Stats instance = null;
-    private OutputStream outputStream;
+    private Writer outputStream;
     private Chemin lastIndiv = null;
     private Stats() {}
 
@@ -20,14 +20,39 @@ public class Stats {
         return instance;
     }
 
-    public void setOutputStream(OutputStream outputStream) {
-        this.outputStream = outputStream;
+    public void setOutputStream(OutputStream outputStream) throws UnsupportedEncodingException {
+        this.outputStream = new OutputStreamWriter(outputStream, "UTF-8");
     }
 
-    public void onNewGeneration(Population population) {
-//        System.out.println(population.getBest().getFitness()+", "+population.getAverageFitness());
+    public void write(String msg) {
+        try {
+            outputStream.write(msg);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void writeln(String msg) {
+        this.write(msg+"\n");
+    }
 
+    public void write(Integer msg) {
+        try {
+            outputStream.write(msg);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeln(Integer msg) {
+        this.write(msg+"\n");
+    }
+
+    public void onNewGeneration(Population population, int generationNumber) {
+        this.writeln(generationNumber + "; " + population.size() + "; " + population.getBest().getFitness() + ";");
+System.out.println(population.size());
         Chemin indiv = (Chemin) population.getBest();
         if(lastIndiv != null && !lastIndiv.equals(indiv)) {
             Representation.getInstance().drawChemin(indiv);
@@ -40,9 +65,11 @@ public class Stats {
       lastIndiv = indiv;
 
     }
-    public void onStart() {}
+    public void onStart() {
+        this.writeln("\"generation\"; \"size\"; \"best fitness\";");
+    }
     public void onFinish(Individu individu, int nbIterations) {
-        System.out.println(nbIterations);
+
     }
     public void afterSelection(Population population) {}
     public void onChildrenGeneration(Population population) {}

@@ -9,6 +9,7 @@ import java.util.List;
 public abstract class Population extends ArrayList<Individu> {
 
     private Double averageFitness = null;
+    private Individu worst;
 
     public abstract double getDiversity();
 
@@ -57,5 +58,19 @@ public abstract class Population extends ArrayList<Individu> {
         }
 
         return best;
+    }
+
+    public Individu getWorst() {
+        Individu worst = null;
+        Double worstFitness = null;
+        for(Individu individu : this) {
+            Double indivFitness = individu.getFitness();
+            if(worstFitness == null || indivFitness > worstFitness) {
+                worst = individu;
+                worstFitness = indivFitness;
+            }
+        }
+
+        return worst;
     }
 }

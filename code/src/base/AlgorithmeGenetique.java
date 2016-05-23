@@ -1,5 +1,6 @@
 package base;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +30,7 @@ public class AlgorithmeGenetique {
         this.nbIndividus = nbIndividus;
     }
 
-    public Individu run(List<? extends Gene> genes) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+    public Individu run(List<? extends Gene> genes) throws IllegalAccessException, InstantiationException, InvocationTargetException, IOException {
         Stats stats = Stats.getInstance();
         stats.onStart();
         Population population;
@@ -42,8 +43,8 @@ public class AlgorithmeGenetique {
         int i =0;
         int sameSuccessif = 0;
         Individu savedBest = null;
-        while(i < nbIterations) {
-            stats.onNewGeneration(population);
+        while(i < nbIterations && !population.isEmpty()) {
+            stats.onNewGeneration(population, i);
             savedBest = population.getBest();
             // Selection
             population = methodSelection.select(population);
@@ -73,7 +74,6 @@ public class AlgorithmeGenetique {
             population.addAll(children);
             if(savedBest.equals(population.getBest())) sameSuccessif++;
             else sameSuccessif = 0;
-            i++;
         }
         Individu best = population.getBest();
         stats.onFinish(best, i);
