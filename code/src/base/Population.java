@@ -8,18 +8,23 @@ import java.util.List;
 
 public abstract class Population extends ArrayList<Individu> {
 
+    private Double averageFitness = null;
+    private Individu worst;
+
     public abstract double getDiversity();
 
     public double getAverageFitness()
     {
-        double averageFit = 0;
-        for(Individu individu : this) {
-            averageFit += individu.getFitness();
+        if(averageFitness == null) {
+            double averageFitness = 0;
+            for(Individu individu : this) {
+                averageFitness += individu.getFitness();
+            }
+
+            averageFitness /= this.size();
         }
 
-        averageFit /= this.size();
-
-        return averageFit;
+        return averageFitness;
     }
 
     /**
@@ -53,5 +58,19 @@ public abstract class Population extends ArrayList<Individu> {
         }
 
         return best;
+    }
+
+    public Individu getWorst() {
+        Individu worst = null;
+        Double worstFitness = null;
+        for(Individu individu : this) {
+            Double indivFitness = individu.getFitness();
+            if(worstFitness == null || indivFitness > worstFitness) {
+                worst = individu;
+                worstFitness = indivFitness;
+            }
+        }
+
+        return worst;
     }
 }

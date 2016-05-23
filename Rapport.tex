@@ -22,10 +22,9 @@
 
 	La sélection naturelle est un processus de l'évolution des espèces. Les individus les plus adaptés à leur environnement, sont plus susceptible de « survivre », alors au fil de nouvelles générations, la population devient meilleur au regard de son environnement.
 
-	En clair, les algorithmes génétique mime le processus de sélection naturelle pour trouver des solutions effocaces à un problème a un ou plusieurs paramètres.
+	En clair, les algorithmes génétique mime le processus de sélection naturelle pour trouver des solutions efficaces à un problème à un ou plusieurs paramètres.
 	Les algorithmes génétiques sont des algorithmes d'approximation puisqu'il ne permettent pas de trouver la solution optimale à un problème, mais de s'en rapprocher. En outre, ils ont l'avantage de trouver une solution en un temps bien inférieur aux algorithmes déterministes.
 
-	Quelques définitions :
 	Les termes utilisés dans ce genre de problème sont empruntés de la génétique, ainsi, on parlera :
 	\begin{description}
 	\item [d'individu :] c'est une solution admissible du problème
@@ -40,12 +39,12 @@
 	Dans les problèmes d'optimisation où le nombre de variables est grand, 
 
 	\subsection{Principe}
-	Les algorithmes de génétique se décomposent en 4 phases :
+	Les algorithmes de génétique se décomposent en 5 phases :
 	\begin{itemize}
 	\item La création d'une population initiale
 	\item L'évaluation des individus
-	\item La sélection, les croisement et les mutations
-	\item (Éventuellement une nouvelle évaluation)
+	\item La sélection des meilleurs individus
+	\item Les croisement et les mutations des enfants
 	\item La création d'une nouvelle population
 	\end{itemize}
 
@@ -94,5 +93,19 @@
 	\subsection{Modélisation du problème}
 
 \section{Résultats}
+	\subsection{Paramètrage de l'algorithme}
+
+	Liste des paramètres sur lesquels influer :
+	\begin{itemize}
+	\item Nombre d'individus initial $]1,1000[$
+	\item Nombre d'itérations max $]1,5000[$
+	\item Nombre de villes $]10,50[$
+	\item Méthode de selection (Elistisme, roulette, rang, tournoi)
+	\item Taux de croisement $]0,1[$
+	\item Taux de mutations $]0,1[$
+	\item Taux de selection $]0,1[$
+	\end{itemize}
+
+	\subsection{Résultats}
 
 \end{document}

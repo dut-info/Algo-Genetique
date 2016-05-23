@@ -21,7 +21,7 @@ public class Croisement implements base.Croisement {
     }
 
     public Croisement() {
-        this.propability = 0.6;
+        this.propability = 0.5;
     }
 
     @Override

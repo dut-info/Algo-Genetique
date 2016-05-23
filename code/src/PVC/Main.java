@@ -3,6 +3,10 @@ package PVC;
 import base.*;
 import base.Croisement;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
@@ -11,9 +15,16 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    public static void main(String [] arg) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public static void main(String [] arg) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException {
+        int nbIterations = Integer.parseInt(arg[0]);
+        int nbIndiv = Integer.parseInt(arg[1]);
+        int nbVilles = Integer.parseInt(arg[2]);
+
+        Stats stats = Stats.getInstance();
+        File file = new File("stats.csv");
+        stats.setOutputStream(new FileOutputStream(file));
+
         ArrayList<Ville> villes = new ArrayList<>();
-        int nbVilles = 20;
 
         boolean random = false;
 
@@ -37,11 +48,12 @@ public class Main {
 
         //PVC.Chemins chemins = new PVC.Chemins(villes);
 
-        Selection selectionTournoi = new SelectionTournoi(0.5);
+        Selection selectionElitisme = new SelectionRoulette(0.666);
         Croisement croisement = new PVC.Croisement();
         Mutation mutation = new Mutation();
 
-        AlgorithmeGenetique algo = new AlgorithmeGenetique(Chemins.class, selectionTournoi, croisement, mutation, 1500 /*nbIterations*/, 1000 /*nbIndividus*/);
+        AlgorithmeGenetique algo = new AlgorithmeGenetique(Chemins.class, selectionElitisme, croisement, mutation, nbIterations, nbIndiv);
+
         PVC.Chemin best = (PVC.Chemin) algo.run(villes);
         System.out.println(best);
         repre.drawChemin(best);
