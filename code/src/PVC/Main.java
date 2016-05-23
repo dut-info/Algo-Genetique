@@ -37,11 +37,11 @@ public class Main {
 
         //PVC.Chemins chemins = new PVC.Chemins(villes);
 
-        Selection selectionElitisme = new SelectionElitisme();
+        Selection selectionTournoi = new SelectionTournoi(0.5);
         Croisement croisement = new PVC.Croisement();
         Mutation mutation = new Mutation();
 
-        AlgorithmeGenetique algo = new AlgorithmeGenetique(Chemins.class, selectionElitisme, croisement, mutation, 150, 150);
+        AlgorithmeGenetique algo = new AlgorithmeGenetique(Chemins.class, selectionTournoi, croisement, mutation, 1500 /*nbIterations*/, 1000 /*nbIndividus*/);
         PVC.Chemin best = (PVC.Chemin) algo.run(villes);
         System.out.println(best);
         repre.drawChemin(best);

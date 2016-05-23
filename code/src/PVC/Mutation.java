@@ -4,9 +4,6 @@ import base.Gene;
 import base.Individu;
 import base.Probability;
 
-/**
- * Created by corentin on 18/05/16.
- */
 public class Mutation implements base.Mutation {
 
     private double propability;

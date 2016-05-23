@@ -27,7 +27,7 @@ public class Stats {
     public void onNewGeneration(Population population) {
 //        System.out.println(population.getBest().getFitness()+", "+population.getAverageFitness());
 
-
+    	System.out.println(population.size());
         Chemin indiv = (Chemin) population.getBest();
         if(lastIndiv != null && !lastIndiv.equals(indiv)) {
             Representation.getInstance().drawChemin(indiv);
