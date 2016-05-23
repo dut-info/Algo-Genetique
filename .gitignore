@@ -6,3 +6,5 @@ code/.project
 *.log
 *.toc
 code/.idea
+*.class
+.~
