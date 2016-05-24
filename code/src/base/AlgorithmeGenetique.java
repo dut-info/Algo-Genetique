@@ -74,6 +74,7 @@ public class AlgorithmeGenetique {
             population.addAll(children);
             if(savedBest.equals(population.getBest())) sameSuccessif++;
             else sameSuccessif = 0;
+            i++;
         }
         Individu best = population.getBest();
         stats.onFinish(best, i);

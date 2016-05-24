@@ -21,14 +21,15 @@
 \newpage
 \section{Principe des algorithmes génétiques}
 	\subsection{Introduction}
-	Les algorithmes génétiques sont des algorithme qui se basent sur la sélection naturelle afin de trouver des solutions à un problème d'optimisation. 
+	Les algorithmes génétiques sont des algorithmes qui se basent sur la sélection naturelle afin de trouver des solutions à un problème d'optimisation.
 
 	La sélection naturelle est un processus de l'évolution des espèces. Les individus les plus adaptés à leur environnement, sont plus susceptible de « survivre », alors au fil de nouvelles générations, la population devient meilleur au regard de son environnement.
 
-	En clair, les algorithmes génétique mime le processus de sélection naturelle pour trouver des solutions efficaces à un problème à un ou plusieurs paramètres.
-	Les algorithmes génétiques sont des algorithmes d'approximation puisqu'il ne permettent pas de trouver la solution optimale à un problème, mais de s'en rapprocher. En outre, ils ont l'avantage de trouver une solution en un temps bien inférieur aux algorithmes déterministes.
+	En clair, les algorithmes génétiques miment le processus de sélection naturelle pour trouver des solutions efficaces à un problème à un ou plusieurs paramètres.
+	Ce sont des algorithmes d'approximation puisqu'il ne permettent pas de trouver la solution optimale à un problème, mais de s'en rapprocher. En outre, ils ont l'avantage de trouver une solution en un temps bien inférieur aux algorithmes déterministes.
 
-	Les termes utilisés dans ce genre de problème sont empruntés de la génétique, ainsi, on parlera :
+    \paragraph{}
+	Les termes utilisés dans ce genre de problème sont empruntés de la théorie de l'évolution, ainsi, on parlera :
 	\begin{description}
 	\item [d'individu :] c'est une solution admissible du problème
 	\item [de population :] c'est un ensemble d'individus
@@ -37,20 +38,21 @@
 	\item [de fonction objectif :] c'est une fonction qui permet de définir qu'un individu est meilleur qu'un autre
 	\end{description}
 
-
-	Pourquoi utiliser des algorithmes génétiques ?
-
-	Dans les problèmes d'optimisation où le nombre de variables est grand, 
+    \paragraph{Pourquoi utiliser des algorithmes génétiques ?}\mbox{}\\
+	Dans les problèmes d'optimisation où le nombre de variables est grand, une solution optimale est coûteuse et n'est pas toujours nécessaire, néamoins, le temps de calcul doit être optimisé. Dans cette optique, les algorithmes génétiques sont bien adaptés, puisqu'ils permettent de traiter d'un problème à plusieurs variables efficacement.
+	De plus, ce genre d'algorithmes est particulièrement adaptable à différents problèmes.
 
 	\subsection{Principe}
 	Les algorithmes de génétique se décomposent en 5 phases :
-	\begin{itemize}
+	\begin{enumerate}
 	\item La création d'une population initiale
 	\item L'évaluation des individus
 	\item La sélection des meilleurs individus
 	\item Les croisement et les mutations des enfants
 	\item La création d'une nouvelle population
-	\end{itemize}
+	\end{enumerate}
+    \mbox{}\\
+    Ensuite, on réitère à partir de la phase $2$ jusqu'à la condition d'arrêt, elle peut être un nombre d'itération ou le moment ou le meilleur individu n'évolue plus.
 
 	\begin{figure}
 		\begin{center}
@@ -62,10 +64,35 @@
 		\label{Schéma général d'un algorithme génétique}
 	\end{figure}
 
-
 		\subsubsection{Population initiale}
-		La population initiale 
-		\subsubsection{Nouveau individus}
+		La population initiale doit être créer aléatoirement, et chaque individu doit être une solution admissible du problème. Créer aléatoirement la population permet de s'assurer de la diversié de la population. La diversité est un élement important dans ce genre d'algorithmes puisqu'elle permet de ne pas converger vers une solution unique et d'explorer le maximum des solutions du problèmes.
+
+		\subsubsection{Evaluation des individus}
+        Chaque individu doit être évaluable, sur une même échelle, on va associer une note à chacun d'entre eux pour pouvoir les comparer. La méthode d'évaluation dépend du problème. L'évaluation est une phase importante lorsque l'on applique un algorithme génétique à un problème multi-critère, puisqu'il faut syntétiser l'ensemble des critères pour ne retourner qu'une "note".
+
+        \subsubsection{Sélection des individus}
+        La phase de sélection permet de choisir les individus qui vont survivre à la nouvelle génération et qui seront susceptible de se "reproduire".
+        La méthode de sélection doit garder une certaine diversité dans la population, en effet, un individu mauvais \(au regard de sa fonction objectif\), peut donner un enfant très bon après croisement.
+        \\
+        Plusieurs méthodes existent :
+
+        \paragraph{La sélection élitique}\mbox{}\\
+        Ce type de sélection trie les individus d'une géneration par ordre de fitness et choisit les $n/2$ individus les meilleurs. C'est la méthode de sélection la plus simple à implementer. Le problème de cette méthode réside dans le fait qu'elle converge rapidement vers une unique solution, au fil des sélections, la population devient de moins en moins diversifiée.
+
+        \paragraph{La sélection par roulette}\mbox{}\\
+        Dans ce type de selection, un individus avec un meilleur fitness qu'un autre à plus de chance d'être choisit. Tous les individus sont placés sur une roulette, plus l'individus à un bon fitness, plus il occupera une grande partie de la roulette. On tire ensuite un emplacement de la roulette au hasard et l'individu correspondant à cet emplacement est sélectionné pour la génération suivante. On réitère le processus jusqu'à obtenir la taille de la nouvelle population souhaitée.
+
+        \paragraph{La sélection par rang}\mbox{}\\
+        Ce type de sélection est similaire à la précedente, mais dans ce cas, la probabilité d'être selectionné dépend du rang de l'individus dans la population \(préalablement triée par fitness\). La sélection par roulette présente un inconvénient, si un ou des individus domine tous les autres, la selection n'assure plus la diversité de la population, la sélection par rang permet de résoudre se problème.
+
+        \paragraph{La sélection par tournoi}\mbox{}\\
+        On forme des groupes d'individus aléatoire au seins de la poulation et on selectionne dans chaque groupe, l'individu ayant le meilleur fitness.
+
+        \subsubsection{Croisement des individus}
+        La phase de croisement associe deux individus pour créer un ou plusieurs individus enfant, qui partageront les gènes des deux parents. Généralement, on choisit aléatoirement un point de césure $c$ dans la chaine génétique des parents et on copie les $c$ premiers gène du premier parent dans le premier enfant et les gène de $c$ jusque la fin du second parent vers le premier enfant, pour le second enfant, les rôles des deux parents sont inversés.
+
+        \subsubsection{Mutation des individus}
+        La mutation consiste à changer aléaoirement un gène d'un individu par un autre gène. Cette phase permet d'éviter la convergence des solutions. Elle s'effectue sur les enfants nouvellements créer et dois avoir une propabilité faible, dans le cas contraire, la recherche deviendrait aléatoire.
 
 \section{Application au porblème du voyageur de commerce}
 	\subsection{Définition du problème}
@@ -79,31 +106,61 @@
     Soit :
     \begin{itemize}
         \item $n$ le nombre de villes
-        \item $\{v_{i}\}^{n}$ l'ensemble des villes
+        \item $\{v_i\}^{n}$ l'ensemble des villes
         \item $c$ un chemin, c'est à dire une permutation des $n$ villes
         \item $\{D_{d, a}\}^{n, n}$ la distance de la ville $d$ à $a$
     \end{itemize}
-    La fonction ocject pour un chemin $c$ est : $f(c) = \sum_{i=1}^{n}D_{ c_i c_{(i+1) \bmod n } }$
+    La fonction ocjectif pour un chemin $c$ est : $f(c) = \sum_{i=1}^{n}D_{ c_i c_{(i+1) \bmod n } }$
 
 	Résoudre ce problème en trouvant une solution optimale reviendrais à parcourir l'ensemble des solutions du problème. C'est à dire l'ensemble des chemins, donc toutes les permuations de $c$, soit $n!$ permutations. \\
-	Par exemple, pour 10, 30 et 100 villes : \\
-	\begin{tabular}{cc}
+	Par exemple, pour 10, 30 et 100 villes et si l'on suppose qu'une évaluation d'une permutation coûte 1 us : \\
+
+	\begin{tabular}{ccc}
 	\hline
-	$n$ & nombre de permutations \\
+	$n$ & Nombre de permutations & Temps \\
 	\hline
-	10 & 3 628 800 \\
-	30 & $26 \times 10^{31}$ \\
-	100 & $93 \times 10^{156}$ \\
+	10 & 3 628 800 & 3,6 s\\
+	30 & $26 \times 10^{31}$ & $84 \times 10^{15}$ siècles \\
+	100 & $93 \times 10^{156}$ & $3 \times 10^{142}$ siècles \\
 	\hline
 	\end{tabular}
+	\\
+    Même si pour dix villes une solution optimale reste envisagable, à partir de 30 villes, un algorithme de ce genre serait beaucoup trop long.
+	Dans ce cas, l'utilisation d'un algorithme génétique est approprié.
 
-    Même si pour dix villes un algorithme déterministe soit envisagable, à partir de 30 villes, un algorithme de ce genre serait beaucoup trop long, si l'on suppose qu'une permutation prend 1 microseconde,
-	
-	Un individu : un chemin, c'est à dire une permutation des entier de 1 à n
-	Une ville sera représentée par un entier
-	La fonction objectif à minimiser : calcule pour chaque chemin, la distance à parcourir
+    \subsection{Implementation}
 
-	\subsection{Modélisation du problème}
+    Dans le cas du problème du voyageur de commerce, un individu représente un chemin, une ville représente un gène qui est modelisé par un entier et une position en x et y.
+
+    \paragraph{Création de la population initiale}: les chemins de départ sont créer aléatoirement, ce qui permet de diversifier au maximum la population initial, et de ne pas se limiter à quelques possibilités.
+
+    \paragraph{Evaluation des chemins}: la fonction objectif calcule pour chaque chemin, la distance totale à parcourir. L'objectif de l'alogorithme est de minimiser cette fonction. Dans notre implémentation, la distance entre deux villes $v_1$ et $v_2$ est donnée par la formule $D_{v_1, v_2} = \sqrt{(v_{1_x}-v_{2_x})^2 + (v_{1_y}-v_{2_y})^2}$
+
+    \paragraph{Selection des chemins}: nous avons implémenté plusieurs méthodes de selection : selection élitique,  selection par roulette, selection par tournoi. \\
+    Ce qui nous permettera de comparer les différentes méthodes de selection.
+
+    \paragraph{Croisement des chemins selectionnés}: le croisement de deux chemins parents créer, en fonction du taux de croisement, un ou plusieur individu. Pour un taux de croisement de 1, deux chemins créent 2 enfants, pour 1.5, deux chemins créer en moyenne 1.5 enfants. Ce paramètre nous permettera de faire évoluer la taille de la population au fil des générations.
+    Le croisement de deux chemins de taille $m$ s'effectue comme suit :
+    \begin{itemize}
+    	\item On tire un nombre aléatoire $rand$ entre 1 et $m$
+    	\item On copie les villes de 1 à $rand$ du premier parent vers le premier enfant
+    	\item On copie les villes du second parent qui ne sont pas dans le premier enfant
+    	\item On effectue la même opération pour le second enfant en inversant le rôle des parents
+    \end{itemize}
+
+    Cette méthode de croisement nous assure que chaque enfant créer soit un enfant "correct", c'est à dire qu'il soit une permutation des $n$ villes.
+
+    \paragraph{Mutation d'un chemin}: la mutation intervient avec une probabilité de $x \in ]0, 1[$. Le procesus de mutation consite à inverser au hasard deux villes d'un chemin.
+
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.5]{croisement.png}
+		\end{center}
+
+		\caption{Schéma d'un croisement et d'une mutation}
+
+		\label{Schéma d'un croisement et d'une mutation}
+	\end{figure}
 
 \section{Résultats}
 	\subsection{Paramètrage de l'algorithme}
@@ -120,6 +177,15 @@
 	\end{itemize}
 
 	\subsection{Résultats}
+
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.4]{comparatif.png}
+		\end{center}
+	\end{figure}
+
+\section{Améliorations}
+
 
 \section{Références}
 	\url{http://khayyam.developpez.com/articles/algo/genetic/}
