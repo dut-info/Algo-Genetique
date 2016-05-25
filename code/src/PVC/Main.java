@@ -21,8 +21,7 @@ public class Main {
         int nbVilles = Integer.parseInt(arg[2]);
 
         Stats stats = Stats.getInstance();
-        File file = new File("stats.csv");
-        stats.setOutputStream(new FileOutputStream(file));
+        stats.setOutputStream(System.out);
 
         ArrayList<Ville> villes = new ArrayList<>();
 
@@ -48,14 +47,15 @@ public class Main {
 
         //PVC.Chemins chemins = new PVC.Chemins(villes);
 
-        Selection selectionElitisme = new SelectionRoulette(0.666);
+        Selection selectionElitisme = new SelectionRoulette(0.5);
         Croisement croisement = new PVC.Croisement();
-        Mutation mutation = new Mutation();
+        Mutation mutation = new Mutation(0.3);
 
         AlgorithmeGenetique algo = new AlgorithmeGenetique(Chemins.class, selectionElitisme, croisement, mutation, nbIterations, nbIndiv);
 
         PVC.Chemin best = (PVC.Chemin) algo.run(villes);
         System.out.println(best);
+
         repre.drawChemin(best);
     }
 }

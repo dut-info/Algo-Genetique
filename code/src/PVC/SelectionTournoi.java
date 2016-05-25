@@ -48,4 +48,8 @@ public class SelectionTournoi implements Selection
 		
 		return newPopulation;
 	}
+
+	public String toString() {
+		return "Selection par tournoi";
+	}
 }

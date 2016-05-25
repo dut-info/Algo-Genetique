@@ -31,4 +31,8 @@ public class SelectionElitisme implements Selection {
 		return p;
 	}
 
+	public String toString() {
+		return "Selection elitique";
+	}
+
 }

@@ -43,7 +43,7 @@ public class AlgorithmeGenetique {
         int i =0;
         int sameSuccessif = 0;
         Individu savedBest = null;
-        while(i < nbIterations && !population.isEmpty()) {
+        while(i < nbIterations && !population.isEmpty() && (savedBest == null ||  savedBest.getFitness() > 189)) {
             stats.onNewGeneration(population, i);
             savedBest = population.getBest();
             // Selection

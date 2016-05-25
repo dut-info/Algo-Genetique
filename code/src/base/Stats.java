@@ -11,13 +11,24 @@ import java.io.*;
 public class Stats {
 
     private static Stats instance = null;
+    private static int column = 0;
     private Writer outputStream;
     private Chemin lastIndiv = null;
+    private Object[][] data;
+    private Integer showSteps = null;
     private Stats() {}
 
     public static Stats getInstance() {
-        if(instance == null) instance = new Stats();
+        if(instance == null) {
+            instance = new Stats();
+            instance.data = new Object[501][51];
+        }
+
         return instance;
+    }
+
+    public void showSteps(int ms) {
+        this.showSteps = ms;
     }
 
     public void setOutputStream(OutputStream outputStream) throws UnsupportedEncodingException {
@@ -51,25 +62,45 @@ public class Stats {
     }
 
     public void onNewGeneration(Population population, int generationNumber) {
-        this.writeln(generationNumber + "; " + population.size() + "; " + population.getBest().getFitness() + ";");
 
-        Chemin indiv = (Chemin) population.getBest();
-        if(lastIndiv != null && !lastIndiv.equals(indiv)) {
-            Representation.getInstance().drawChemin(indiv);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+//        this.data[generationNumber][0] = generationNumber;
+//        this.data[generationNumber][column] = population.getBest().getFitness();
+
+        if(this.showSteps != null && this.showSteps != 0) {
+            Chemin indiv = (Chemin) population.getBest();
+            if(lastIndiv != null && !lastIndiv.equals(indiv)) {
+                Representation.getInstance().drawChemin(indiv);
+                try {
+                    Thread.sleep(showSteps);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            lastIndiv = indiv;
         }
-      lastIndiv = indiv;
-
     }
     public void onStart() {
-        this.writeln("\"generation\"; \"size\"; \"best fitness\";");
+        column++;
     }
     public void onFinish(Individu individu, int nbIterations) {
+        System.out.print(nbIterations+";");
+/*
+        String[] columns = new String[51];
+        columns[0] = "Generation num";
+        for (int i = 1; i < 51; i++) {
+            columns[i] = "Iteration " + i;
+        }
 
+        TableModel model = new DefaultTableModel(data, columns);
+
+        final File file = new File("stats/stats.ods");
+        try {
+            SpreadSheet.createEmpty(model).saveAs(file);
+            //OOUtils.open(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
     }
     public void afterSelection(Population population) {}
     public void onChildrenGeneration(Population population) {}

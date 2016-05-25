@@ -43,7 +43,6 @@ public class Representation extends JComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         if(this.villes != null) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -72,6 +71,7 @@ public class Representation extends JComponent {
 
     public void drawChemin(Chemin chemin) {
         this.chemin = chemin;
+        validate();
         repaint();
     }
 }

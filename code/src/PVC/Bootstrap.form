@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="PVC.Bootstrap">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="449"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="152d9" class="javax.swing.JButton" binding="lancerButton" default-binding="true">
+        <constraints border-constraint="South"/>
+        <properties>
+          <text value="Lancer"/>
+        </properties>
+      </component>
+      <grid id="5c4f2" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="94966" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="36628" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Taux de mutation"/>
+                </properties>
+              </component>
+              <component id="3ed34" class="javax.swing.JSlider" binding="tauxMutation">
+                <constraints/>
+                <properties>
+                  <value value="10"/>
+                </properties>
+              </component>
+              <component id="517e0" class="javax.swing.JLabel" binding="tauxMutationLabel">
+                <constraints/>
+                <properties>
+                  <preferredSize width="30" height="18"/>
+                  <text value="0.1"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="d210d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="a934c" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Methode de selection"/>
+                </properties>
+              </component>
+              <component id="c83b4" class="javax.swing.JComboBox" binding="methodeSelection" custom-create="true">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </grid>
+          <grid id="b649a" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="83b60" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Generation des villes"/>
+                </properties>
+              </component>
+              <component id="e7e06" class="javax.swing.JRadioButton" binding="aleatoireRadioButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="aleatoire"/>
+                </properties>
+              </component>
+              <component id="f33a6" class="javax.swing.JRadioButton" binding="enCercleRadioButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <selected value="true"/>
+                  <text value="en cercle"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="49aa8" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="20bf9" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Nombre d'itérations"/>
+                </properties>
+              </component>
+              <component id="91dc8" class="javax.swing.JSpinner" binding="nbIterations">
+                <constraints/>
+                <properties>
+                  <minimumSize width="50" height="28"/>
+                  <preferredSize width="50" height="28"/>
+                  <toolTipText value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="65dd" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <alignmentX value="0.5"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="4d8f4" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Nombre de villes"/>
+                </properties>
+              </component>
+              <component id="d841e" class="javax.swing.JSpinner" binding="nbVilles">
+                <constraints/>
+                <properties>
+                  <preferredSize width="50" height="28"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="86a65" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="4f2e1" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Nombre d'individus"/>
+                </properties>
+              </component>
+              <component id="9d64c" class="javax.swing.JSpinner" binding="nbIndividus">
+                <constraints/>
+                <properties>
+                  <preferredSize width="50" height="28"/>
+                  <toolTipText value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="ce6f6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="91a7b" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Afficher les étapes"/>
+                </properties>
+              </component>
+              <component id="caab3" class="javax.swing.JSpinner" binding="showSteps">
+                <constraints/>
+                <properties>
+                  <preferredSize width="50" height="28"/>
+                </properties>
+              </component>
+              <component id="b7031" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="ms"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="buttonGroup1">
+      <member id="f33a6"/>
+      <member id="e7e06"/>
+      <member id="f33a6"/>
+    </group>
+  </buttonGroups>
+</form>

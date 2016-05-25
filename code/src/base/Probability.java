@@ -17,7 +17,7 @@ public class Probability {
     }
 
     public static double between(double min, double max) {
-        return min + (Math.random() * ((max - min) + 1));
+        return min + (Math.random() * (max - min));
     }
 
     /**
