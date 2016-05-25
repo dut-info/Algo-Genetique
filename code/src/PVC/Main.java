@@ -22,7 +22,7 @@ public class Main {
 
         Stats stats = Stats.getInstance();
         stats.setOutputStream(System.out);
-
+        stats.showSteps(50);
         ArrayList<Ville> villes = new ArrayList<>();
 
         boolean random = false;
@@ -47,10 +47,12 @@ public class Main {
 
         //PVC.Chemins chemins = new PVC.Chemins(villes);
 
-        Selection selectionElitisme = new SelectionRoulette(0.5);
+        Selection selectionElitisme = new SelectionElitisme(0.5);
         Croisement croisement = new PVC.Croisement();
         Mutation mutation = new Mutation(0.3);
-
+System.out.println(nbIndiv);
+        System.out.println(nbIterations);
+        System.out.println(nbVilles);
         AlgorithmeGenetique algo = new AlgorithmeGenetique(Chemins.class, selectionElitisme, croisement, mutation, nbIterations, nbIndiv);
 
         PVC.Chemin best = (PVC.Chemin) algo.run(villes);

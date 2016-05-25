@@ -5,7 +5,7 @@
 \usepackage[francais]{babel}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{systile}
+\usepackage{sistyle}
 
 \begin{document}
 \title{Algorithmes génétiques et application au problème du voyageur de commerce}
@@ -153,7 +153,7 @@
 
     \paragraph{Mutation d'un chemin}: la mutation intervient avec une probabilité de $x \in ]0, 1[$. Le procesus de mutation consite à inverser au hasard deux villes d'un chemin.
 
-	\begin{figure}
+	\begin{figure}[!h]
 		\begin{center}
 			\includegraphics[scale=0.5]{croisement.png}
 		\end{center}
@@ -162,6 +162,9 @@
 
 		\label{Schéma d'un croisement et d'une mutation}
 	\end{figure}
+
+	\subsection{Technique}
+	Nous avons implémenté l'algorithme en java, ce qui nous permet d'utiliser le polymorphisme pour par exemple, définir plusieur méthodes de sélection tout en conservant la même logique dans le reste du code. C'est également un langage facilement portable et qui nous est familier.
 
 \section{Résultats}
 	\subsection{Paramètrage de l'algorithme}
@@ -178,11 +181,30 @@
 
 	\subsection{Résultats}
 
-	\begin{figure}
+    Afin de comparer nos résultats, nous testé notre programmme sous différentes conditions en faisant varier les paramètres.
+    Le graphique ci-contre montre la convergence de l'algorithe au fil des génerations suivant deux méthodes de sélections.
+    Les autres paramètres ont été fixés : 500 individus initiaux, 500 itérations max, 30 villes, taux de mutation à 10\% et taux de selection à 50\%
+	\begin{figure}[!h]
 		\begin{center}
-			\includegraphics[scale=0.4]{comparatif.png}
+		\makebox[\textwidth][c]{
+			\includegraphics[width=1.4\textwidth]{comparatif.png}
+			}
 		\end{center}
 	\end{figure}
+
+	On remarque que la méthode élitique converge assez rapidement.
+
+	Un second teste nous permet de mesurer l'influence du taux du mutation sur vitesse de l'algorithme. On fait varier le taux de mutation de 0 à 1 avec un pas de 0.01, pour chaque pas, on effectue 60 tests et on fait leur moyenne.
+    \begin{figure}[!h]
+        \begin{center}
+            \makebox[\textwidth][c]{
+                \includegraphics[width=1.4\textwidth]{influence_mutation.png}
+            }
+        \end{center}
+    \end{figure}
+    \\
+    On remarque que plus le taux de mutation augmente, plus l'on converge vite vers la solution optimale. Néamoins, pour la sélection par tournoi, on remarque une cassure un peu avant 0.5.
+    La mutation permet de diversifier la population en ajoutant un facteur aléatoire à la recherche.
 
 \section{Questions}
 
@@ -190,7 +212,7 @@
 \item Quelles sont les 4 étapes d'un algorithme génétique ?
 \item Quels sont les avantages des algorithmes génétiques ?
 \item En quoi les algorithmes génétiques sont adaptés au problème du voyageur de commerce ?
-\end
+\end{enumerate}
 
 \section{Références}
 	\url{http://khayyam.developpez.com/articles/algo/genetic/}

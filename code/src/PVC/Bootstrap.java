@@ -48,9 +48,9 @@ public class Bootstrap extends JFrame implements ChangeListener, MouseListener {
 
     private void createUIComponents() {
         Selection selections[] = {
-                new SelectionRoulette(),
-                new SelectionElitisme(),
-                new SelectionTournoi()
+                new SelectionRoulette(0.5),
+                new SelectionElitisme(0.5),
+                new SelectionTournoi(0.5)
         };
         methodeSelection = new JComboBox<>(selections);
     }
@@ -63,6 +63,7 @@ public class Bootstrap extends JFrame implements ChangeListener, MouseListener {
 
         Stats stats = Stats.getInstance();
         stats.setOutputStream(System.out);
+        System.out.println((Integer) this.showSteps.getValue());
         stats.showSteps((Integer) this.showSteps.getValue());
 
         ArrayList<Ville> villes = new ArrayList<>();
@@ -87,7 +88,7 @@ public class Bootstrap extends JFrame implements ChangeListener, MouseListener {
 
         Selection selectionElitisme = (Selection) methodeSelection.getSelectedItem();
         base.Croisement croisement = new PVC.Croisement();
-        Mutation mutation = new Mutation(tauxMutation.getValue()/100);
+        Mutation mutation = new Mutation((double) tauxMutation.getValue()/100);
 
         AlgorithmeGenetique algo = new AlgorithmeGenetique(Chemins.class, selectionElitisme, croisement, mutation, nbIterations, nbIndiv);
 
