@@ -5,10 +5,11 @@
 \usepackage[francais]{babel}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{systile}
 
 \begin{document}
 \title{Algorithmes génétiques et application au problème du voyageur de commerce}
-\author{Fabien Dubois,\\
+\author{Fabien DUBOIS,\\
    Antoine RATO,\\
    Corentin HEMBISE\\
    \url{https://github.com/dut-info/Algo-Genetique}\\}
@@ -21,9 +22,9 @@
 \newpage
 \section{Principe des algorithmes génétiques}
 	\subsection{Introduction}
-	Les algorithmes génétiques sont des algorithmes qui se basent sur la sélection naturelle afin de trouver des solutions à un problème d'optimisation.
-
-	La sélection naturelle est un processus de l'évolution des espèces. Les individus les plus adaptés à leur environnement, sont plus susceptible de « survivre », alors au fil de nouvelles générations, la population devient meilleur au regard de son environnement.
+	Les algorithmes génétiques sont des algorithmes qui se basent sur la sélection naturelle afin de trouver des solutions à un problème d'optimisation, celle - ci est un processus de l'évolution des espèces.
+	
+	Les individus les plus adaptés à leur environnement, sont plus susceptible de « survivre », alors au fil de nouvelles générations, la population devient meilleur au regard de son environnement.
 
 	En clair, les algorithmes génétiques miment le processus de sélection naturelle pour trouver des solutions efficaces à un problème à un ou plusieurs paramètres.
 	Ce sont des algorithmes d'approximation puisqu'il ne permettent pas de trouver la solution optimale à un problème, mais de s'en rapprocher. En outre, ils ont l'avantage de trouver une solution en un temps bien inférieur aux algorithmes déterministes.
@@ -83,10 +84,10 @@
         Dans ce type de selection, un individus avec un meilleur fitness qu'un autre à plus de chance d'être choisit. Tous les individus sont placés sur une roulette, plus l'individus à un bon fitness, plus il occupera une grande partie de la roulette. On tire ensuite un emplacement de la roulette au hasard et l'individu correspondant à cet emplacement est sélectionné pour la génération suivante. On réitère le processus jusqu'à obtenir la taille de la nouvelle population souhaitée.
 
         \paragraph{La sélection par rang}\mbox{}\\
-        Ce type de sélection est similaire à la précedente, mais dans ce cas, la probabilité d'être selectionné dépend du rang de l'individus dans la population \(préalablement triée par fitness\). La sélection par roulette présente un inconvénient, si un ou des individus domine tous les autres, la selection n'assure plus la diversité de la population, la sélection par rang permet de résoudre se problème.
+        Ce type de sélection est similaire à la précedente, mais dans ce cas, la probabilité d'être selectionné dépend du rang de l'individus dans la population \(préalablement triée par fitness\). La sélection par roulette présente un inconvénient, si un ou des individus dominent tous les autres, la selection n'assure plus la diversité de la population, la sélection par rang permet de résoudre se problème.
 
         \paragraph{La sélection par tournoi}\mbox{}\\
-        On forme des groupes d'individus aléatoire au seins de la poulation et on selectionne dans chaque groupe, l'individu ayant le meilleur fitness.
+        On forme des groupes d'individus aléatoires au seins de la poulation et on selectionne dans chaque groupe, l'individu ayant le meilleur fitness.
 
         \subsubsection{Croisement des individus}
         La phase de croisement associe deux individus pour créer un ou plusieurs individus enfant, qui partageront les gènes des deux parents. Généralement, on choisit aléatoirement un point de césure $c$ dans la chaine génétique des parents et on copie les $c$ premiers gène du premier parent dans le premier enfant et les gène de $c$ jusque la fin du second parent vers le premier enfant, pour le second enfant, les rôles des deux parents sont inversés.
@@ -113,7 +114,7 @@
     La fonction ocjectif pour un chemin $c$ est : $f(c) = \sum_{i=1}^{n}D_{ c_i c_{(i+1) \bmod n } }$
 
 	Résoudre ce problème en trouvant une solution optimale reviendrais à parcourir l'ensemble des solutions du problème. C'est à dire l'ensemble des chemins, donc toutes les permuations de $c$, soit $n!$ permutations. \\
-	Par exemple, pour 10, 30 et 100 villes et si l'on suppose qu'une évaluation d'une permutation coûte 1 us : \\
+	Par exemple, pour 10, 30 et 100 villes et si l'on suppose qu'une évaluation d'une permutation coûte 1 \micro s : \\
 
 	\begin{tabular}{ccc}
 	\hline
@@ -132,14 +133,14 @@
 
     Dans le cas du problème du voyageur de commerce, un individu représente un chemin, une ville représente un gène qui est modelisé par un entier et une position en x et y.
 
-    \paragraph{Création de la population initiale}: les chemins de départ sont créer aléatoirement, ce qui permet de diversifier au maximum la population initial, et de ne pas se limiter à quelques possibilités.
+    \paragraph{Création de la population initiale}: les chemins de départ sont créés aléatoirement, ce qui permet de diversifier au maximum la population initial, et de ne pas se limiter à quelques possibilités.
 
     \paragraph{Evaluation des chemins}: la fonction objectif calcule pour chaque chemin, la distance totale à parcourir. L'objectif de l'alogorithme est de minimiser cette fonction. Dans notre implémentation, la distance entre deux villes $v_1$ et $v_2$ est donnée par la formule $D_{v_1, v_2} = \sqrt{(v_{1_x}-v_{2_x})^2 + (v_{1_y}-v_{2_y})^2}$
 
     \paragraph{Selection des chemins}: nous avons implémenté plusieurs méthodes de selection : selection élitique,  selection par roulette, selection par tournoi. \\
     Ce qui nous permettera de comparer les différentes méthodes de selection.
 
-    \paragraph{Croisement des chemins selectionnés}: le croisement de deux chemins parents créer, en fonction du taux de croisement, un ou plusieur individu. Pour un taux de croisement de 1, deux chemins créent 2 enfants, pour 1.5, deux chemins créer en moyenne 1.5 enfants. Ce paramètre nous permettera de faire évoluer la taille de la population au fil des générations.
+    \paragraph{Croisement des chemins selectionnés}: le croisement de deux chemins parents créés, en fonction du taux de croisement, un ou plusieur individu. Pour un taux de croisement de 1, deux chemins créent 2 enfants, pour 1.5, deux chemins créent en moyenne 1.5 enfants. Ce paramètre nous permettera de faire évoluer la taille de la population au fil des générations.
     Le croisement de deux chemins de taille $m$ s'effectue comme suit :
     \begin{itemize}
     	\item On tire un nombre aléatoire $rand$ entre 1 et $m$
@@ -148,7 +149,7 @@
     	\item On effectue la même opération pour le second enfant en inversant le rôle des parents
     \end{itemize}
 
-    Cette méthode de croisement nous assure que chaque enfant créer soit un enfant "correct", c'est à dire qu'il soit une permutation des $n$ villes.
+    Cette méthode de croisement nous assure que chaque enfant créé soit un enfant "correct", c'est à dire qu'il soit une permutation des $n$ villes.
 
     \paragraph{Mutation d'un chemin}: la mutation intervient avec une probabilité de $x \in ]0, 1[$. Le procesus de mutation consite à inverser au hasard deux villes d'un chemin.
 
@@ -170,8 +171,7 @@
 	\item Nombre d'individus initiaux $]1,1000[$
 	\item Nombre d'itérations max $]1,5000[$
 	\item Nombre de villes $]10,50[$
-	\item Méthode de selection (Elistisme, roulette, rang, tournoi)
-	\item Taux de croisement $]1,3[$
+	\item Méthode de selection (Elistisme, roulette, tournoi)
 	\item Taux de mutations $]0,1[$
 	\item Taux de selection $]0,1[$
 	\end{itemize}
@@ -184,8 +184,13 @@
 		\end{center}
 	\end{figure}
 
-\section{Améliorations}
+\section{Questions}
 
+\begin{enumerate}
+\item Quelles sont les 4 étapes d'un algorithme génétique ?
+\item Quels sont les avantages des algorithmes génétiques ?
+\item En quoi les algorithmes génétiques sont adaptés au problème du voyageur de commerce ?
+\end
 
 \section{Références}
 	\url{http://khayyam.developpez.com/articles/algo/genetic/}
