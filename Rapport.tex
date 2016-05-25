@@ -8,7 +8,7 @@
 
 \begin{document}
 \title{Algorithmes génétiques et application au problème du voyageur de commerce}
-\author{Fabien Dubois,\\
+\author{Fabien DUBOIS,\\
    Antoine RATO,\\
    Corentin HEMBISE\\
    \url{https://github.com/dut-info/Algo-Genetique}\\}
@@ -83,10 +83,10 @@
         Dans ce type de selection, un individus avec un meilleur fitness qu'un autre à plus de chance d'être choisit. Tous les individus sont placés sur une roulette, plus l'individus à un bon fitness, plus il occupera une grande partie de la roulette. On tire ensuite un emplacement de la roulette au hasard et l'individu correspondant à cet emplacement est sélectionné pour la génération suivante. On réitère le processus jusqu'à obtenir la taille de la nouvelle population souhaitée.
 
         \paragraph{La sélection par rang}\mbox{}\\
-        Ce type de sélection est similaire à la précedente, mais dans ce cas, la probabilité d'être selectionné dépend du rang de l'individus dans la population \(préalablement triée par fitness\). La sélection par roulette présente un inconvénient, si un ou des individus domine tous les autres, la selection n'assure plus la diversité de la population, la sélection par rang permet de résoudre se problème.
+        Ce type de sélection est similaire à la précedente, mais dans ce cas, la probabilité d'être selectionné dépend du rang de l'individus dans la population \(préalablement triée par fitness\). La sélection par roulette présente un inconvénient, si un ou des individus dominent tous les autres, la selection n'assure plus la diversité de la population, la sélection par rang permet de résoudre se problème.
 
         \paragraph{La sélection par tournoi}\mbox{}\\
-        On forme des groupes d'individus aléatoire au seins de la poulation et on selectionne dans chaque groupe, l'individu ayant le meilleur fitness.
+        On forme des groupes d'individus aléatoires au seins de la poulation et on selectionne dans chaque groupe, l'individu ayant le meilleur fitness.
 
         \subsubsection{Croisement des individus}
         La phase de croisement associe deux individus pour créer un ou plusieurs individus enfant, qui partageront les gènes des deux parents. Généralement, on choisit aléatoirement un point de césure $c$ dans la chaine génétique des parents et on copie les $c$ premiers gène du premier parent dans le premier enfant et les gène de $c$ jusque la fin du second parent vers le premier enfant, pour le second enfant, les rôles des deux parents sont inversés.
@@ -132,14 +132,14 @@
 
     Dans le cas du problème du voyageur de commerce, un individu représente un chemin, une ville représente un gène qui est modelisé par un entier et une position en x et y.
 
-    \paragraph{Création de la population initiale}: les chemins de départ sont créer aléatoirement, ce qui permet de diversifier au maximum la population initial, et de ne pas se limiter à quelques possibilités.
+    \paragraph{Création de la population initiale}: les chemins de départ sont créés aléatoirement, ce qui permet de diversifier au maximum la population initial, et de ne pas se limiter à quelques possibilités.
 
     \paragraph{Evaluation des chemins}: la fonction objectif calcule pour chaque chemin, la distance totale à parcourir. L'objectif de l'alogorithme est de minimiser cette fonction. Dans notre implémentation, la distance entre deux villes $v_1$ et $v_2$ est donnée par la formule $D_{v_1, v_2} = \sqrt{(v_{1_x}-v_{2_x})^2 + (v_{1_y}-v_{2_y})^2}$
 
     \paragraph{Selection des chemins}: nous avons implémenté plusieurs méthodes de selection : selection élitique,  selection par roulette, selection par tournoi. \\
     Ce qui nous permettera de comparer les différentes méthodes de selection.
 
-    \paragraph{Croisement des chemins selectionnés}: le croisement de deux chemins parents créer, en fonction du taux de croisement, un ou plusieur individu. Pour un taux de croisement de 1, deux chemins créent 2 enfants, pour 1.5, deux chemins créer en moyenne 1.5 enfants. Ce paramètre nous permettera de faire évoluer la taille de la population au fil des générations.
+    \paragraph{Croisement des chemins selectionnés}: le croisement de deux chemins parents créés, en fonction du taux de croisement, un ou plusieur individu. Pour un taux de croisement de 1, deux chemins créent 2 enfants, pour 1.5, deux chemins créent en moyenne 1.5 enfants. Ce paramètre nous permettera de faire évoluer la taille de la population au fil des générations.
     Le croisement de deux chemins de taille $m$ s'effectue comme suit :
     \begin{itemize}
     	\item On tire un nombre aléatoire $rand$ entre 1 et $m$
@@ -148,7 +148,7 @@
     	\item On effectue la même opération pour le second enfant en inversant le rôle des parents
     \end{itemize}
 
-    Cette méthode de croisement nous assure que chaque enfant créer soit un enfant "correct", c'est à dire qu'il soit une permutation des $n$ villes.
+    Cette méthode de croisement nous assure que chaque enfant créé soit un enfant "correct", c'est à dire qu'il soit une permutation des $n$ villes.
 
     \paragraph{Mutation d'un chemin}: la mutation intervient avec une probabilité de $x \in ]0, 1[$. Le procesus de mutation consite à inverser au hasard deux villes d'un chemin.
 
