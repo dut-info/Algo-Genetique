@@ -163,8 +163,16 @@
 		\label{Schéma d'un croisement et d'une mutation}
 	\end{figure}
 
-	\subsection{Technique}
+	\subsection{Implementation technique}
 	Nous avons implémenté l'algorithme en java, ce qui nous permet d'utiliser le polymorphisme pour par exemple, définir plusieur méthodes de sélection tout en conservant la même logique dans le reste du code. C'est également un langage facilement portable et qui nous est familier.
+    \\
+    Afin d'avoir une visualisation de l'avancée de la recherche et un résultat final parlant, nous avons représenté les villes par un graphe, ce qui nous permet de faire évoluer ce graphe au cours des génerations. Les villes peuvent être generée aléatoirement ou en cercle. La distance minimale pour un cercle est son périmètre, le chemin minimal est donc celui qui passe par le périmètre, ce qui nous est utile lors des phases de tests.
+    \\
+    Pour executer le programme sous Linux, OSx et Windows, il suffit d'executer la commande :
+
+    \begin{verbatim}
+    java -jar Algo-Genetique.jar
+    \end{verbatim}
 
 \section{Résultats}
 	\subsection{Paramètrage de l'algorithme}
